@@ -34,8 +34,8 @@ python tools/golf_tracking.py image -n yolox-s  -c path/to/your/ckpt -f exps/exa
   <img src="assets/kalman_tracking.gif" width="800" alt="Kalman Tracking" /> 
 </p>
 
-  * **Left:** Naive Tracking (Frame Resize and Detection)
-  * **Right:** Kalman Tracking (Apply Kalman Filter and Crop Prior Window for Detection)
+  * **Up:** Naive Tracking (Frame Resize and Detection)
+  * **Down:** Kalman Tracking (Apply Kalman Filter and Crop Prior Window for Detection)
 
 
 
