@@ -101,11 +101,11 @@ class VOCDetection(CacheDataset):
     def __init__(
         self,
         data_dir,
-        image_sets=[("2007", "trainval"), ("2012", "trainval")],
+        image_sets=[("2012", "trainval")],
         img_size=(416, 416),
         preproc=None,
         target_transform=AnnotationTransform(),
-        dataset_name="VOC0712",
+        dataset_name="VOC2012",
         cache=False,
         cache_type="ram",
     ):
@@ -133,11 +133,11 @@ class VOCDetection(CacheDataset):
         self.num_imgs = len(self.ids)
 
         self.annotations = self._load_coco_annotations()
-
         path_filename = [
-            (self._imgpath % self.ids[i]).split(self.root + "/")[1]
+            (self._imgpath % self.ids[i]).split(self.root + "\\")[1]
             for i in range(self.num_imgs)
         ]
+       
         super().__init__(
             input_dimension=img_size,
             num_imgs=self.num_imgs,

@@ -9,6 +9,14 @@ from loguru import logger
 
 import torch
 import torch.backends.cudnn as cudnn
+import os
+import sys
+
+current_script_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Add the parent directory of the current script to sys.path
+parent_directory = os.path.dirname(current_script_directory)
+sys.path.append(parent_directory)
 
 from yolox.core import launch
 from yolox.exp import Exp, check_exp_value, get_exp

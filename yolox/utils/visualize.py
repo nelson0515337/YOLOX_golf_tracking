@@ -8,7 +8,15 @@ import numpy as np
 __all__ = ["vis"]
 
 
-def vis(img, boxes, scores, cls_ids, conf=0.5, class_names=None):
+def vis(img, boxes, scores, cls_ids, conf=0.5, class_names=None, crop_region=None):
+
+    # Mark the crop region if provided
+    if crop_region is not None:
+        crop_x0, crop_y0, crop_x1, crop_y1 = map(int, crop_region)
+        crop_color = (172, 255, 0, 50)  # Lime green with increased transparency
+        crop_overlay = np.zeros_like(img, dtype=np.uint8)
+        cv2.rectangle(crop_overlay, (crop_x0, crop_y0), (crop_x1, crop_y1), crop_color, -1)
+        img = cv2.addWeighted(img, 1, crop_overlay, 0.1, 0)
 
     for i in range(len(boxes)):
         box = boxes[i]

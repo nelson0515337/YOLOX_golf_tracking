@@ -6,13 +6,21 @@ import argparse
 import os
 import time
 from loguru import logger
-
+import sys
 import cv2
 
 import torch
 
+current_script_directory = os.path.dirname(os.path.abspath(__file__))
+
+
+# Add the parent directory of the current script to sys.path
+parent_directory = os.path.dirname(current_script_directory)
+sys.path.append(parent_directory)
+
 from yolox.data.data_augment import ValTransform
 from yolox.data.datasets import COCO_CLASSES
+from yolox.data.datasets.voc_classes import VOC_CLASSES
 from yolox.exp import get_exp
 from yolox.utils import fuse_model, get_model_info, postprocess, vis
 
@@ -102,7 +110,7 @@ class Predictor(object):
         self,
         model,
         exp,
-        cls_names=COCO_CLASSES,
+        cls_names,
         trt_file=None,
         decoder=None,
         device="cpu",
@@ -303,7 +311,7 @@ def main(exp, args):
         decoder = None
 
     predictor = Predictor(
-        model, exp, COCO_CLASSES, trt_file, decoder,
+        model, exp, VOC_CLASSES, trt_file, decoder,
         args.device, args.fp16, args.legacy,
     )
     current_time = time.localtime()
